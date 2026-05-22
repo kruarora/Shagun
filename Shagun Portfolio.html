@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shagun Narula - Disability Case Manager</title>
+<meta name="description" content="Shagun Narula - Disability Case Manager, Justice Practitioner, and multilingual advocate with 6+ years of experience across Canada and India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#FAF7F2;
+  --cream-dk:#EDE8E0;
+  --cream-md:#F3EEE6;
+  --charcoal:#28211E;
+  --charcoal-m:#7A706A;
+  --forest:#243D32;
+  --forest-m:#2F5244;
+  --forest-l:#3D6B58;
+  --terra:#C05E38;
+  --terra-l:#E8927A;
+  --sage:#6F9474;
+  --sage-l:#B5CEB8;
+  --taupe:#C2AFA0;
+  --gold:#BF9130;
+}
+
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);color:var(--charcoal);
+  font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.75;
+  overflow-x:hidden;cursor:none;
+}
+
+/* -- CURSOR -- */
+#cursor{
+  position:fixed;width:10px;height:10px;border-radius:50%;
+  background:var(--terra);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:transform 0.08s,width 0.2s,height 0.2s,background 0.2s;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;border-radius:50%;
+  border:1.5px solid rgba(192,94,56,0.45);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.25s,height 0.25s,border-color 0.25s;
+}
+body:has(a:hover) #cursor{width:14px;height:14px;background:var(--forest);}
+body:has(a:hover) #cursor-ring{width:48px;height:48px;border-color:rgba(36,61,50,0.35);}
+
+/* -- PROGRESS BAR -- */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--terra),var(--gold),var(--forest));
+  z-index:200;transition:width 0.1s linear;
+}
+
+/* -- NAV -- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 4.5rem;
+  transition:background 0.4s,box-shadow 0.4s;
+}
+nav.scrolled{
+  background:rgba(250,247,242,0.94);
+  backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 var(--cream-dk);
+}
+.nav-logo{
+  display:flex;flex-direction:column;line-height:1;text-decoration:none;
+}
+.nav-logo-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.55rem;font-weight:600;letter-spacing:0.02em;
+  color:var(--charcoal);
+}
+.nav-logo-role{
+  font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--terra);margin-top:1px;
+}
+.nav-links{display:flex;gap:3rem;list-style:none;align-items:center;}
+.nav-links a{
+  font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--charcoal-m);text-decoration:none;position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--terra);transition:width 0.3s ease;
+}
+.nav-links a:hover{color:var(--charcoal);}
+.nav-links a:hover::after{width:100%;}
+
+/* -- HERO -- */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 4.5rem 5.5rem;
+  position:relative;overflow:hidden;
+}
+.hero-name-bg{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18vw,22vw,28rem);font-weight:600;font-style:italic;
+  letter-spacing:-0.04em;line-height:0.85;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(192,94,56,0.08);
+  pointer-events:none;white-space:nowrap;
+  animation:drift 18s ease-in-out infinite alternate;
+  user-select:none;
+}
+@keyframes drift{from{transform:translate(-50%,-51%);}to{transform:translate(-50%,-49%);}}
+
+.hero-orb{
+  position:absolute;top:8%;right:8%;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%,rgba(61,107,88,0.14),rgba(192,94,56,0.06) 60%,transparent);
+  animation:pulse-orb 6s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes pulse-orb{from{transform:scale(1);}to{transform:scale(1.08);}}
+
+.hero-orb2{
+  position:absolute;bottom:-100px;left:-80px;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle at 60% 60%,rgba(36,61,50,0.07),transparent 70%);
+  pointer-events:none;
+  animation:pulse-orb 8s ease-in-out infinite alternate-reverse;
+}
+
+.hero-content{position:relative;z-index:2;}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;
+  font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--terra);
+  opacity:0;animation:fadeUp 0.9s 0.3s forwards;
+}
+.hero-eyebrow-line{width:3rem;height:1px;background:var(--terra);}
+
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(4.5rem,9vw,9rem);
+  font-weight:300;letter-spacing:-0.03em;line-height:0.92;
+  color:var(--charcoal);margin-bottom:0.15em;
+  opacity:0;animation:fadeUp 1s 0.5s forwards;
+}
+.hero-name span{font-style:italic;color:var(--forest);}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,2.2vw,2rem);font-weight:300;font-style:italic;
+  color:var(--charcoal-m);margin-bottom:3rem;letter-spacing:0.01em;
+  opacity:0;animation:fadeUp 1s 0.7s forwards;
+}
+
+.hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:2rem;
+  opacity:0;animation:fadeUp 1s 0.9s forwards;
+}
+.hero-statement{
+  font-size:1.05rem;font-weight:300;line-height:1.75;
+  color:var(--charcoal-m);max-width:46ch;
+}
+.hero-statement strong{color:var(--charcoal);font-weight:500;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+.btn{
+  display:inline-flex;align-items:center;gap:0.55rem;
+  padding:0.85rem 2rem;border-radius:2px;cursor:none;
+  font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;
+  transition:all 0.25s ease;border:none;
+}
+.btn-primary{background:var(--forest);color:#fff;}
+.btn-primary:hover{background:var(--forest-l);transform:translateY(-2px);box-shadow:0 8px 24px rgba(36,61,50,0.25);}
+.btn-outline{background:transparent;color:var(--charcoal);border:1px solid var(--taupe);}
+.btn-outline:hover{border-color:var(--charcoal);transform:translateY(-2px);}
+
+.hero-stats{
+  display:flex;gap:0;opacity:0;
+  animation:fadeUp 1s 1.1s forwards;
+  border:1px solid var(--cream-dk);
+  border-radius:3px;overflow:hidden;
+  margin-top:3.5rem;align-self:flex-start;
+}
+.stat{
+  padding:1.4rem 2.2rem;border-right:1px solid var(--cream-dk);
+  position:relative;overflow:hidden;transition:background 0.3s;
+}
+.stat:last-child{border-right:none;}
+.stat::before{
+  content:'';position:absolute;inset:0;
+  background:var(--forest);transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.35s ease;z-index:0;
+}
+.stat:hover::before{transform:scaleY(1);}
+.stat:hover .stat-num,.stat:hover .stat-lbl{color:#fff;position:relative;z-index:1;}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;font-weight:600;line-height:1;
+  color:var(--charcoal);transition:color 0.3s;position:relative;z-index:1;
+}
+.stat-lbl{
+  font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--charcoal-m);margin-top:0.3rem;transition:color 0.3s;position:relative;z-index:1;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* -- MARQUEE -- */
+.marquee-wrap{
+  background:var(--forest);overflow:hidden;
+  padding:1rem 0;position:relative;
+}
+.marquee-track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:marquee 28s linear infinite;
+}
+.marquee-track:hover{animation-play-state:paused;}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:1.5rem;
+  padding:0 2rem;
+  font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.65);
+}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--terra-l);flex-shrink:0;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* -- SECTION GENERIC -- */
+section{padding:8rem 4.5rem;}
+.eyebrow{
+  font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--terra);margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:0.9rem;
+}
+.eyebrow::before{content:'';display:block;width:2.2rem;height:1px;background:var(--terra);}
+.eyebrow-c{justify-content:center;}
+.eyebrow-c::before,.eyebrow-c::after{content:'';display:block;width:2rem;height:1px;background:var(--terra);}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:400;line-height:1.1;color:var(--charcoal);margin-bottom:2.5rem;
+}
+
+/* -- ABOUT -- */
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:7rem;align-items:start;}
+.about-text p{color:var(--charcoal-m);margin-bottom:1.5rem;font-size:1rem;font-weight:300;}
+.pull-quote{
+  border-left:3px solid var(--terra);
+  padding:1.8rem 2.2rem;margin:2.8rem 0;
+  background:var(--cream-md);border-radius:0 4px 4px 0;
+  position:relative;overflow:hidden;
+}
+.pull-quote::before{
+  content:'\201C';position:absolute;top:-0.5rem;left:1rem;
+  font-family:'Cormorant Garamond',serif;font-size:6rem;
+  color:rgba(192,94,56,0.12);line-height:1;pointer-events:none;
+}
+.pull-quote p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:400;font-style:italic;
+  line-height:1.55;color:var(--forest);margin:0!important;
+  position:relative;z-index:1;
+}
+
+/* about sidebar cards */
+.about-visual{position:sticky;top:8rem;display:flex;flex-direction:column;gap:1.2rem;}
+.v-card{
+  border-radius:4px;padding:2.2rem;
+  border:1px solid var(--cream-dk);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.v-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(44,40,37,0.08);}
+.v-card.dark{background:var(--forest);border-color:transparent;}
+.v-card-lbl{
+  font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--charcoal-m);margin-bottom:1.2rem;
+}
+.v-card.dark .v-card-lbl{color:var(--sage-l);}
+.lang-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.lang-tag{
+  padding:0.38rem 0.88rem;border-radius:2px;
+  font-size:0.82rem;font-weight:400;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.18);
+  color:#fff;cursor:none;
+  transition:background 0.2s,transform 0.2s;
+}
+.lang-tag:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);}
+.lang-note{margin-top:1.1rem;font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.65;}
+.journey-step{
+  display:flex;gap:1rem;align-items:flex-start;
+  padding:0.9rem 0;border-bottom:1px solid var(--cream-dk);
+}
+.journey-step:last-child{border-bottom:none;padding-bottom:0;}
+.journey-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--terra);
+  margin-top:0.6rem;flex-shrink:0;transition:transform 0.2s;
+}
+.journey-step:hover .journey-dot{transform:scale(1.5);}
+.journey-text{font-size:0.87rem;color:var(--charcoal-m);line-height:1.6;}
+.journey-text strong{color:var(--charcoal);font-weight:500;}
+
+/* -- EXPERTISE -- */
+.expertise{background:var(--charcoal);position:relative;overflow:hidden;}
+.expertise-bg{
+  position:absolute;top:0;right:0;bottom:0;width:40%;
+  background:linear-gradient(135deg,rgba(36,61,50,0.4),transparent);
+  pointer-events:none;
+}
+.expertise-bg2{
+  position:absolute;bottom:-200px;left:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,94,56,0.06),transparent 70%);
+  pointer-events:none;
+}
+.expertise .eyebrow{color:var(--sage);}
+.expertise .eyebrow::before{background:var(--sage);}
+.expertise .sec-title{color:var(--cream);}
+.expertise-intro{
+  color:var(--taupe);font-size:1rem;font-weight:300;
+  max-width:58ch;margin-bottom:4.5rem;line-height:1.8;
+}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);}
+.exp-card{
+  background:var(--charcoal);padding:2.8rem 2.5rem;
+  position:relative;overflow:hidden;
+  transition:background 0.35s;
+}
+.exp-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--terra),var(--gold));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.exp-card:hover{background:#312A27;}
+.exp-card:hover::after{transform:scaleX(1);}
+.exp-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4rem;font-weight:600;font-style:italic;
+  color:rgba(255,255,255,0.04);
+  position:absolute;top:1.2rem;right:1.5rem;line-height:1;
+  transition:color 0.35s;
+}
+.exp-card:hover .exp-num{color:rgba(192,94,56,0.1);}
+.exp-icon{font-size:1.6rem;margin-bottom:1.2rem;}
+.exp-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;font-weight:600;color:var(--cream);
+  margin-bottom:0.8rem;line-height:1.25;position:relative;z-index:1;
+}
+.exp-desc{font-size:0.88rem;color:var(--taupe);line-height:1.75;font-weight:300;position:relative;z-index:1;}
+.exp-tag{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  margin-top:1.2rem;padding:0.3rem 0.75rem;
+  background:rgba(111,148,116,0.12);
+  border:1px solid rgba(111,148,116,0.28);
+  border-radius:2px;font-size:0.73rem;
+  letter-spacing:0.06em;color:var(--sage);
+  position:relative;z-index:1;
+}
+
+/* -- VALUES STRIP -- */
+.values{
+  background:var(--cream-md);padding:5rem 4.5rem;
+  display:flex;align-items:center;gap:5rem;flex-wrap:wrap;
+}
+.values-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:400;font-style:italic;
+  color:var(--charcoal);flex-shrink:0;max-width:18ch;line-height:1.25;
+}
+.values-list{
+  display:flex;gap:0;flex:1;border:1px solid var(--cream-dk);
+  border-radius:3px;overflow:hidden;flex-wrap:wrap;
+}
+.value-item{
+  flex:1;min-width:150px;padding:1.6rem 1.8rem;
+  border-right:1px solid var(--cream-dk);
+  transition:background 0.3s;position:relative;
+}
+.value-item:last-child{border-right:none;}
+.value-item:hover{background:var(--cream);}
+.value-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--terra);margin-bottom:0.8rem;
+  transition:transform 0.3s;
+}
+.value-item:hover .value-dot{transform:scale(1.6);}
+.value-name{font-size:0.8rem;font-weight:500;letter-spacing:0.06em;color:var(--charcoal);}
+.value-desc{font-size:0.8rem;font-weight:300;color:var(--charcoal-m);margin-top:0.3rem;line-height:1.5;}
+
+/* -- CONTACT -- */
+.contact{
+  background:var(--forest);position:relative;overflow:hidden;text-align:center;
+}
+.contact-bg{
+  position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,107,88,0.5),transparent 70%);
+  pointer-events:none;
+}
+.contact .eyebrow{color:var(--sage-l);}
+.contact .eyebrow-c::before,.contact .eyebrow-c::after{background:var(--sage-l);}
+.contact .sec-title{color:#fff;position:relative;z-index:1;}
+.contact-desc{
+  color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;
+  max-width:56ch;margin:0 auto 3rem;line-height:1.8;position:relative;z-index:1;
+}
+.contact-pills{
+  display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;
+  margin-bottom:3.5rem;position:relative;z-index:1;
+}
+.c-pill{
+  padding:0.42rem 1.1rem;border-radius:2px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  font-size:0.76rem;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;
+  color:rgba(255,255,255,0.65);
+  transition:background 0.2s,border-color 0.2s;
+}
+.c-pill:hover{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.28);}
+.contact-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-light{background:#fff;color:var(--forest);}
+.btn-light:hover{background:var(--cream);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.35);}
+.btn-ghost:hover{border-color:#fff;transform:translateY(-2px);}
+.contact-email-wrap{
+  margin-top:3.5rem;position:relative;z-index:1;
+}
+.contact-email-lbl{
+  font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-bottom:0.6rem;
+}
+.contact-email{
+  display:inline-block;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;
+  color:#fff;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  padding-bottom:0.2rem;
+  transition:border-color 0.2s,color 0.2s;
+}
+.contact-email:hover{border-color:#fff;color:var(--sage-l);}
+
+/* -- FOOTER -- */
+footer{
+  background:var(--charcoal);padding:2rem 4.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:600;color:var(--taupe);letter-spacing:0.02em;
+}
+footer p{font-size:0.8rem;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+footer a:hover{color:var(--taupe);}
+
+/* -- REVEAL -- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal-l.in{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal-r.in{opacity:1;transform:translateX(0);}
+
+/* -- RESPONSIVE -- */
+@media(max-width:960px){
+  body{cursor:auto;}
+  #cursor,#cursor-ring{display:none;}
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  section,footer{padding-left:1.5rem;padding-right:1.5rem;}
+  .hero{padding:7rem 1.5rem 4rem;}
+  .hero-name-bg{display:none;}
+  .about-grid{grid-template-columns:1fr;gap:3rem;}
+  .about-visual{position:static;}
+  .exp-grid{grid-template-columns:1fr;}
+  .hero-stats{flex-direction:column;gap:0;width:fit-content;}
+  .stat{border-right:none;border-bottom:1px solid var(--cream-dk);}
+  .stat:last-child{border-bottom:none;}
+  .values{gap:2.5rem;}
+  .values-list{flex-direction:column;}
+  .value-item{border-right:none;border-bottom:1px solid var(--cream-dk);}
+  footer{flex-direction:column;text-align:center;}
+  .hero-bottom{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
+
+<nav id="nav">
+  <a href="#home" class="nav-logo">
+    <span class="nav-logo-name">Shagun Narula</span>
+    <span class="nav-logo-role">Disability Case Manager</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#contact">Connect</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-name-bg" aria-hidden="true">SN</div>
+  <div class="hero-orb" aria-hidden="true"></div>
+  <div class="hero-orb2" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      Disability Justice · Trauma-Informed Practice · Intersectional Advocacy
+    </div>
+
+    <h1 class="hero-name">
+      Shagun<br><span>Narula</span>
+    </h1>
+
+    <p class="hero-title">
+      Disability Case Manager &amp; Justice Practitioner
+    </p>
+
+    <div class="hero-bottom">
+      <p class="hero-statement">
+        You shouldn't have to leave any part of yourself at the door to get the
+        support you need. <strong>I've built my entire practice around making sure
+        you don't have to.</strong>
+      </p>
+      <div class="hero-actions">
+        <a href="#expertise" class="btn btn-primary">My Expertise &rarr;</a>
+        <a href="#contact" class="btn btn-outline">Let's Connect</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" data-count="6">0</div>
+        <div class="stat-lbl">Years of Practice</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count="6">0</div>
+        <div class="stat-lbl">Languages Spoken</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">M.Sc.</div>
+        <div class="stat-lbl">Psychology</div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Disability Justice <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Trauma-Informed Care <span class="marquee-dot"></span></span>
+    <span class="marquee-item">AODA Compliance <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Multilingual Practice <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Individualized Workforce Plans <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Functional Assessment <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Neuroaffirming Practice <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cultural Humility <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Psycho-Educational Review <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Intersectional Framework <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Disability Justice <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Trauma-Informed Care <span class="marquee-dot"></span></span>
+    <span class="marquee-item">AODA Compliance <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Multilingual Practice <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Individualized Workforce Plans <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Functional Assessment <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Neuroaffirming Practice <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cultural Humility <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Psycho-Educational Review <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Intersectional Framework <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="eyebrow reveal">My Story</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 class="sec-title reveal">Systems shaped me. Now I help people navigate and change them.</h2>
+      <p class="reveal">I've spent my life moving between worlds. From Ludhiana to Bengaluru, and then across an ocean to Canada, each transition asked me to learn a new set of unwritten rules - to figure out which parts of myself were welcome in which room, and which weren't. That experience didn't just shape who I am. It made me a better practitioner.</p>
+      <div class="pull-quote reveal">
+        <p>"I bring lived knowledge of what it feels like to be an outsider navigating unfamiliar systems - and I channel that into helping people find footing in spaces that were never designed with them in mind."</p>
+      </div>
+      <p class="reveal">With a Master of Science in Psychology and frontline experience at WorkBC, Kundan Vidya Mandir, and Mantra4Change, my career has spanned educational equity work, psycho-educational support in schools, and disability case management in the Canadian workforce system. Across all of it, my approach stays the same: meet people where they are, not where the intake form expects them to be.</p>
+      <p class="reveal">I'm a neuroaffirming practitioner - genuinely, not just as a line on a resume. That means I don't frame disability as something to be corrected. I frame it as one dimension of a full human life, deserving of thoughtful, individualized, and culturally-grounded support. Disability justice frameworks that centre intersectionality: because race, gender, language, immigration status, and disability are never separate from one another in a person's real life.</p>
+    </div>
+    <div class="about-visual">
+      <div class="v-card dark reveal-r">
+        <div class="v-card-lbl">Languages I work in</div>
+        <div class="lang-tags">
+          <span class="lang-tag">English</span>
+          <span class="lang-tag">French</span>
+          <span class="lang-tag">Hindi</span>
+          <span class="lang-tag">Punjabi</span>
+          <span class="lang-tag">Urdu</span>
+          <span class="lang-tag">Bengali</span>
+        </div>
+        <p class="lang-note">Language is more than communication. It's the fastest way to build genuine trust - and the first thing lost when systems fail people from diverse communities.</p>
+      </div>
+      <div class="v-card reveal-r" style="transition-delay:0.15s">
+        <div class="v-card-lbl">Career Journey</div>
+        <div class="journey-step">
+          <div class="journey-dot"></div>
+          <div class="journey-text"><strong>Mantra4Change</strong> - Educational equity and systems-change work in underserved communities. Building inclusive learning environments from the ground up.</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot"></div>
+          <div class="journey-text"><strong>Kundan Vidya Mandir</strong> - Psycho-educational support and student-centred advocacy. Coordinating accommodations, reviewing assessments.</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-dot"></div>
+          <div class="journey-text"><strong>WorkBC, Canada</strong> - Disability Case Management. IWP design, functional assessments, AODA compliance, and multilingual support at scale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="expertise" id="expertise">
+  <div class="expertise-bg" aria-hidden="true"></div>
+  <div class="expertise-bg2" aria-hidden="true"></div>
+  <div class="eyebrow reveal">What I Bring</div>
+  <h2 class="sec-title reveal">Core Competencies</h2>
+  <p class="expertise-intro reveal">Six years of frontline practice. Cross-cultural fluency across three countries. An intersectional lens that refuses to treat any part of a person's identity as inconvenient to the process.</p>
+  <div class="exp-grid reveal">
+    <div class="exp-card">
+      <div class="exp-num" aria-hidden="true">01</div>
+      <div class="exp-icon">📋</div>
+      <div class="exp-title">Individualized Workforce Planning</div>
+      <div class="exp-desc">Designing IWPs that are genuinely individualized - built around real barriers, authentic strengths, cultural context, and long-term goals. Collaborative by design, trauma-aware throughout, and never template-driven.</div>
+      <span class="exp-tag">IWP Development</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num" aria-hidden="true">02</div>
+      <div class="exp-icon">⚖️</div>
+      <div class="exp-title">AODA Compliance &amp; Accommodation Planning</div>
+      <div class="exp-desc">Deep working knowledge of the Accessibility for Ontarians with Disabilities Act - translating legislation into practical, person-centred accommodations that function in real workplaces, schools, and institutions.</div>
+      <span class="exp-tag">AODA</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num" aria-hidden="true">03</div>
+      <div class="exp-icon">🧠</div>
+      <div class="exp-title">Psycho-Educational Documentation Review</div>
+      <div class="exp-desc">Skilled at reviewing, interpreting, and translating complex psycho-educational assessments into actionable support strategies - ensuring what's on paper actually changes something meaningful for the person it describes.</div>
+      <span class="exp-tag">Psych-Ed Reports</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num" aria-hidden="true">04</div>
+      <div class="exp-icon">🔍</div>
+      <div class="exp-title">Functional Assessment</div>
+      <div class="exp-desc">Conducting holistic functional capacity assessments that centre the client's voice and lived experience as primary data - not footnotes. Assessments that actually inform decisions, rather than fulfil administrative requirements.</div>
+      <span class="exp-tag">Capacity Assessment</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num" aria-hidden="true">05</div>
+      <div class="exp-icon">🌐</div>
+      <div class="exp-title">Multilingual &amp; Cultural Brokering</div>
+      <div class="exp-desc">Fluency in English, French, Hindi, Punjabi, Urdu, and Bengali allows me to meet clients in the language where they feel most themselves. This isn't translation - it's the cultural fluency to understand what's being communicated beneath the words.</div>
+      <span class="exp-tag">6 Languages</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-num" aria-hidden="true">06</div>
+      <div class="exp-icon">💚</div>
+      <div class="exp-title">Trauma-Informed &amp; Neuroaffirming Practice</div>
+      <div class="exp-desc">Working with how a person's brain and nervous system actually function, not against them. Disability justice frameworks that centre intersectionality - because no one's identity, and no one's experience of disability, is ever just one thing.</div>
+      <span class="exp-tag">Disability Justice</span>
+    </div>
+  </div>
+</section>
+
+<div class="values" id="values">
+  <h2 class="values-heading reveal-l">The principles I show up with, every time.</h2>
+  <div class="values-list reveal">
+    <div class="value-item">
+      <div class="value-dot"></div>
+      <div class="value-name">Intersectionality</div>
+      <div class="value-desc">Identity is never just one thing.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-dot"></div>
+      <div class="value-name">Cultural Humility</div>
+      <div class="value-desc">Context is never optional.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-dot"></div>
+      <div class="value-name">Trauma-Awareness</div>
+      <div class="value-desc">Safety before anything else.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-dot"></div>
+      <div class="value-name">Neuroaffirming</div>
+      <div class="value-desc">Difference is not deficit.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-dot"></div>
+      <div class="value-name">Systemic Lens</div>
+      <div class="value-desc">People aren't the problem.</div>
+    </div>
+  </div>
+</div>
+
+<section class="contact" id="contact">
+  <div class="contact-bg" aria-hidden="true"></div>
+  <div class="eyebrow eyebrow-c reveal">Work Together</div>
+  <h2 class="sec-title reveal">Let's Build Something That Actually Works for People</h2>
+  <p class="contact-desc reveal">I'm always open to conversation. Whether you're a multidisciplinary team, an educational institution navigating accessibility, or a community organization building toward more inclusive systems - if your work is about people, reach out. No formality required.</p>
+  <div class="contact-pills reveal">
+    <span class="c-pill">Multidisciplinary Teams</span>
+    <span class="c-pill">Educational Partners</span>
+    <span class="c-pill">Community Organizations</span>
+    <span class="c-pill">AODA Consultation</span>
+    <span class="c-pill">Accommodation Planning</span>
+  </div>
+  <div class="contact-actions reveal">
+    <a href="mailto:shagun.narula@email.com" class="btn btn-light">Send a Message &rarr;</a>
+    <a href="#" class="btn btn-ghost">Download CV</a>
+  </div>
+  <div class="contact-email-wrap reveal">
+    <div class="contact-email-lbl">Or reach me directly</div>
+    <a href="mailto:shagun.narula@email.com" class="contact-email">shagun.narula@email.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Shagun Narula</div>
+  <p>Bengaluru · Ludhiana · Canada</p>
+  <p>&copy; 2025 · <a href="mailto:shagun.narula@email.com">shagun.narula@email.com</a></p>
+</footer>
+
+<script>
+(function(){
+  /* cursor */
+  var cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+  var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  function loopRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loopRing);}
+  loopRing();
+
+  /* progress bar */
+  var bar=document.getElementById('progress');
+  window.addEventListener('scroll',function(){
+    var s=window.scrollY,h=document.body.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?Math.round(s/h*100):0)+'%';
+  },{passive:true});
+
+  /* nav scroll */
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+
+  /* count-up for stats */
+  function countUp(el){
+    var target=parseInt(el.getAttribute('data-count'));
+    if(!target)return;
+    var start=0,dur=1400,step=16,inc=target/(dur/step);
+    var t=setInterval(function(){start+=inc;if(start>=target){el.textContent=target+'+';clearInterval(t);}else{el.textContent=Math.floor(start);}},step);
+  }
+  var statsObserved=false;
+  var statsIO=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&!statsObserved){
+        statsObserved=true;
+        document.querySelectorAll('[data-count]').forEach(countUp);
+      }
+    });
+  },{threshold:0.5});
+  var statsEl=document.querySelector('.hero-stats');
+  if(statsEl)statsIO.observe(statsEl);
+
+  /* reveal on scroll */
+  var reveals=document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:0.08});
+  reveals.forEach(function(el){io.observe(el);});
+
+  /* trigger hero immediately */
+  setTimeout(function(){
+    document.querySelectorAll('.hero .reveal,.hero .reveal-l,.hero .reveal-r').forEach(function(el,i){
+      setTimeout(function(){el.classList.add('in');},i*120);
+    });
+  },100);
+
+  /* stagger exp cards */
+  document.querySelectorAll('.exp-card').forEach(function(card,i){
+    card.style.transitionDelay=(i*0.06)+'s';
+  });
+})();
+</script>
+</body>
+</html>
