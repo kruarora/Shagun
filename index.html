@@ -358,33 +358,86 @@ section{padding:8rem 4.5rem;}
 
 /* -- VALUES STRIP -- */
 .values{
-  background:var(--cream-md);padding:5rem 4.5rem;
-  display:flex;align-items:center;gap:5rem;flex-wrap:wrap;
+  background:var(--cream-md);
+  padding:5.5rem 4.5rem;
+  position:relative;overflow:hidden;
+}
+/* decorative ghost word */
+.values::after{
+  content:'Principles';
+  position:absolute;right:-0.04em;bottom:-0.18em;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(5rem,13vw,12rem);font-weight:600;font-style:italic;
+  color:transparent;-webkit-text-stroke:1px rgba(192,94,56,0.07);
+  line-height:1;pointer-events:none;user-select:none;white-space:nowrap;z-index:0;
 }
 .values-heading{
   font-family:'Cormorant Garamond',serif;
-  font-size:2rem;font-weight:400;font-style:italic;
-  color:var(--charcoal);flex-shrink:0;max-width:18ch;line-height:1.25;
+  font-size:clamp(1.75rem,2.6vw,2.2rem);font-weight:400;font-style:italic;
+  color:var(--charcoal);line-height:1.3;
+  margin-bottom:2.8rem;position:relative;z-index:1;
 }
+/* accent line under heading */
+.values-heading::after{
+  content:'';display:block;margin-top:1.1rem;
+  width:3rem;height:1px;background:var(--terra);
+  transition:width 0.6s ease;
+}
+.values-heading.in::after{width:3rem;}
+
 .values-list{
-  display:flex;gap:0;flex:1;border:1px solid var(--cream-dk);
-  border-radius:3px;overflow:hidden;flex-wrap:wrap;
+  display:flex;gap:0;
+  border:1px solid var(--cream-dk);
+  border-radius:4px;overflow:hidden;
+  position:relative;z-index:1;
 }
 .value-item{
-  flex:1;min-width:150px;padding:1.6rem 1.8rem;
+  flex:1;min-width:140px;padding:2rem 1.8rem;
   border-right:1px solid var(--cream-dk);
-  transition:background 0.3s;position:relative;
+  position:relative;overflow:hidden;
+  /* entrance state */
+  opacity:0;transform:translateY(22px);
+  transition:opacity 0.55s ease, transform 0.55s ease, background 0.35s;
 }
+.value-item.val-in{opacity:1;transform:translateY(0);}
 .value-item:last-child{border-right:none;}
-.value-item:hover{background:var(--cream);}
-.value-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--terra);margin-bottom:0.8rem;
-  transition:transform 0.3s;
+
+/* sweep fill on hover */
+.value-item::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(155deg,rgba(192,94,56,0.07) 0%,rgba(36,61,50,0.05) 100%);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.42s cubic-bezier(0.4,0,0.2,1);
 }
-.value-item:hover .value-dot{transform:scale(1.6);}
-.value-name{font-size:0.8rem;font-weight:500;letter-spacing:0.06em;color:var(--charcoal);}
-.value-desc{font-size:0.8rem;font-weight:300;color:var(--charcoal-m);margin-top:0.3rem;line-height:1.5;}
+.value-item:hover::before{transform:scaleY(1);}
+
+/* dot morphs into a bar */
+.value-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--terra);margin-bottom:1rem;
+  position:relative;z-index:1;
+  transition:width 0.38s cubic-bezier(0.4,0,0.2,1),
+             border-radius 0.38s,
+             background 0.35s;
+}
+.value-item:hover .value-dot{
+  width:2.8rem;border-radius:2px;background:var(--forest);
+}
+
+.value-name{
+  font-size:0.82rem;font-weight:500;letter-spacing:0.07em;
+  color:var(--charcoal);position:relative;z-index:1;
+  transition:color 0.3s, letter-spacing 0.3s;
+}
+.value-item:hover .value-name{color:var(--forest);letter-spacing:0.1em;}
+
+.value-desc{
+  font-size:0.8rem;font-weight:300;color:var(--charcoal-m);
+  margin-top:0.35rem;line-height:1.55;
+  position:relative;z-index:1;
+  transition:color 0.3s;
+}
+.value-item:hover .value-desc{color:var(--charcoal);}
 
 /* -- CONTACT -- */
 .contact{
@@ -475,9 +528,14 @@ footer a:hover{color:var(--taupe);}
   .hero-stats{flex-direction:column;gap:0;width:fit-content;}
   .stat{border-right:none;border-bottom:1px solid var(--cream-dk);}
   .stat:last-child{border-bottom:none;}
-  .values{gap:2.5rem;}
-  .values-list{flex-direction:column;}
-  .value-item{border-right:none;border-bottom:1px solid var(--cream-dk);}
+  .values{padding:3.5rem 1.5rem;}
+  .values-heading{font-size:1.6rem;margin-bottom:2rem;}
+  .values-list{flex-direction:column;width:100%;}
+  .value-item{border-right:none;border-bottom:1px solid var(--cream-dk);min-width:0;padding:1.4rem 1.2rem;}
+  .value-item:nth-child(odd){transform:translateX(-22px);}
+  .value-item:nth-child(even){transform:translateX(22px);}
+  .value-item.val-in{transform:translateX(0)!important;}
+  .value-item:last-child{border-bottom:none;}
   footer{flex-direction:column;text-align:center;}
   .hero-bottom{flex-direction:column;align-items:flex-start;}
 }
@@ -672,7 +730,7 @@ footer a:hover{color:var(--taupe);}
 
 <div class="values" id="values">
   <h2 class="values-heading reveal-l">The principles I show up with, every time.</h2>
-  <div class="values-list reveal">
+  <div class="values-list">
     <div class="value-item">
       <div class="value-dot"></div>
       <div class="value-name">Intersectionality</div>
@@ -788,6 +846,19 @@ footer a:hover{color:var(--taupe);}
   document.querySelectorAll('.exp-card').forEach(function(card,i){
     card.style.transitionDelay=(i*0.06)+'s';
   });
+
+  /* stagger value-item entrance */
+  var valItems=document.querySelectorAll('.value-item');
+  var valObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var i=Array.prototype.indexOf.call(valItems,e.target);
+        setTimeout(function(){e.target.classList.add('val-in');},i*90);
+        valObserver.unobserve(e.target);
+      }
+    });
+  },{threshold:0.1});
+  valItems.forEach(function(el){valObserver.observe(el);});
 })();
 </script>
 </body>
